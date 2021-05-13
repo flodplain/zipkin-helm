@@ -2,12 +2,12 @@ apiVersion: v1
 entries:
   zipkin-helm:
   - apiVersion: v1
-    created: "2021-05-13T09:11:45.406537+01:00"
+    created: "2021-05-13T12:43:57.695049+01:00"
     description: Zipkin distributed tracing
     digest: 4862146745faae1543636334d4ebbda952908867b4428ca1f371d57ba89182dc
     icon: https://avatars1.githubusercontent.com/u/11860887
     name: zipkin-helm
     urls:
-    - https://flodplain.github.io/zipkin-helm/zipkin-helm-0.6.3.tgz
+    - https://flodplain.github.io/zipkin-helm/docs/zipkin-helm-0.6.3.tgz
     version: 0.6.3
-generated: "2021-05-13T09:11:45.405689+01:00"
+generated: "2021-05-13T12:43:57.681061+01:00"
