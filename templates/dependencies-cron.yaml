@@ -28,30 +28,18 @@ spec:
             env:
             - name: STORAGE_TYPE
               value: "{{ .Values.storageMethod }}"
-{{if eq .Values.storageMethod "cassandra3"}}
-            - name: CASSANDRA_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.configmap.username.name }}
-                  key: {{ .Values.configmap.username.key }}
-            - name: CASSANDRA_CONTACT_POINTS
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.configmap.contactPoints.name }}
-                  key: {{ .Values.configmap.contactPoints.key }}
-            - name: CASSANDRA_LOCAL_DC
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.configmap.localdc.name }}
-                  key: {{ .Values.configmap.localdc.key }}
-            - name: CASSANDRA_PASSWORD
+            - name: ES_HOSTS
+              value: "{{ .Values.elastic.host }}"
+            - name: ES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: zipkin
-                  key: cassandra.password
-            - name: CASSANDRA_ENSURE_SCHEMA
-              value: "false"
-{{ end }}
+                  key: elastic.password
+            - name: ES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: zipkin
+                  key: elastic.user
             - name: JAVA_OPTS
               value: "-XX:ConcGCThreads={{ .Values.node.cpus }} -XX:ParallelGCThreads={{ .Values.node.cpus }} -Djava.util.concurrent.ForkJoinPool.common.parallelism={{ .Values.node.cpus }} -Xms{{ .Values.dependencies.resources.javaOptsHeap }}M -Xmx{{ .Values.dependencies.resources.javaOptsHeap }}M -XX:+UseG1GC -server"
             resources:
@@ -61,4 +49,3 @@ spec:
               requests:
                 cpu: "{{ .Values.dependencies.resources.cpuRequest }}"
                 memory: "{{ .Values.dependencies.resources.ramMbRequests }}Mi"
-{{ end }}

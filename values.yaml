@@ -35,17 +35,6 @@ dependencies:
     cpuRequest: 1
     cpuLimit: 1
 
-configmap:
-  name: zipkin-storage
-  contactPoints:
-    name: zipkin-storage
-    key: cassandra.contactpoints
-  username:
-    name: zipkin-storage
-    key: cassandra.username
-  localdc:
-    name: zipkin-storage
-    key: cassandra.localdc
 
 ingress:
   class: "nginx"
@@ -53,26 +42,12 @@ ingress:
   serviceName: zipkin-ui
   servicePort: 9411
 
-storageMethod: cassandra3
-
-cassandra:
+elastic:
   username: zipkin
   password: zipkin
-  contactPoints: zipkin-cassandra:9042
-  localdc: datacenter1
-  ensureSchema: false
-  image: openzipkin/zipkin-cassandra
-  probeStartupDelay: 120
-  tag: 2
-  replicas: 1
-  pvSize: 20Gi
-  resources:
-    ramMbRequest: 3000
-    ramMbLimit: 8000
-    cpuRequest: 200m
-    cpuLimit: 500m
+  host: zipkin-elastic:9042
 
-node:
-  cpus: 2
+storageMethod: elasticsearch
+
 
 
