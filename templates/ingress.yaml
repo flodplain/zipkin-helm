@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: zipkin
@@ -7,10 +7,6 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-  annotations:
-      {{- range $key, $value := .Values.controller.service.annotations }}
-      {{ $key }}: {{ $value | quote }}
-      {{- end }}
 spec:
   rules:
   - host: {{ .Values.ingress.host }}

@@ -25,7 +25,6 @@ ui:
     cpuLimit: 600m
 
 dependencies:
-  enabled: true
   cron: "0 22 * * *"
   imageVersion: 1.11.0
   resources:
@@ -48,6 +47,9 @@ elastic:
   host: zipkin-elastic:9042
 
 storageMethod: elasticsearch
+
+node:
+  cpus: 2
 
 
 

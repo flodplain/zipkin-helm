@@ -1,5 +1,4 @@
-{{if eq .Values.dependencies.enabled true}}
-apiVersion: batch/v1beta1
+apiVersion: apps/v1
 kind: CronJob
 metadata:
   name: {{ .Release.Name }}-zipkin-dependencies-gen
@@ -10,6 +9,9 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   schedule: "{{ .Values.dependencies.cron }}"
+  selector:
+    matchLabels:
+      app: zipkin-dependencies-gen
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
